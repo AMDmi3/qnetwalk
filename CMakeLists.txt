@@ -29,19 +29,7 @@ set(QNETWALK_RESOURCES
 	qnetwalk.qrc
 )
 
-set(QNETWALK_TRANSLATIONS
-	translations/qnetwalk_de.ts
-	translations/qnetwalk_es.ts
-	translations/qnetwalk_fr.ts
-	translations/qnetwalk_it.ts
-	translations/qnetwalk_nl.ts
-	translations/qnetwalk_pl.ts
-	translations/qnetwalk_pt_BR.ts
-	translations/qnetwalk_ru.ts
-	translations/qnetwalk_tr.ts
-	translations/qnetwalk_ua.ts
-	translations/qnetwalk_zh_CN.ts
-)
+file(GLOB QNETWALK_TRANSLATIONS translations/*.ts)
 set_source_files_properties(${QNETWALK_TRANSLATIONS} PROPERTIES OUTPUT_LOCATION "${CMAKE_BINARY_DIR}/translations")
 
 # targets
