@@ -17,6 +17,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QStringList>
+#include <QTextStream>
 #include <QTime>
 #include <QToolBar>
 #include <QUrl>
@@ -86,7 +87,7 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
 	else if(argument == "-nosound") 
 	    isSound = false;
 	else 
-	    qWarning(QString("Unknown option: '" + argument + "'. Try -help.").toLatin1());
+        QTextStream(stderr) << "Unknown option: '" << argument << "'. Try -help.\n";
     }
 
     setWindowTitle(tr("QNetWalk"));

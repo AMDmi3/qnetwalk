@@ -6,6 +6,7 @@
 #include <QLibraryInfo>
 #include <QLocale>
 #include <QTranslator>
+#include <QTextStream>
 
 #include "mainwindow.h"
 
@@ -13,14 +14,15 @@ int main(int argc, char ** argv)
 {
     if((argc > 1) && QString(argv[1]) == "-help")
     {
-	qWarning("Usage: qnetwalk [OPTIONS]\n"
+        QTextStream(stderr) <<
+         "Usage: qnetwalk [OPTIONS]\n"
 		 "QNetWalk is a game for system administrators.\n"
 		 "  -novice     set the skill Novice\n"
 		 "  -amateur    set the skill Amateur\n"
 		 "  -expert     set the skill Expert\n"
 		 "  -master     set the skill Master\n"
 		 "  -nosound    disable all sound effects\n"
-		 "  -help       display this help and exit\n");
+		 "  -help       display this help and exit\n";
         return 1;
     }
 
