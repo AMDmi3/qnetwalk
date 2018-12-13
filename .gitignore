@@ -1,5 +1,9 @@
+*.depends
+CMakeCache.txt
+CMakeFiles
 Makefile
-*.o
-moc_*.cpp
-qrc_*.cpp
+cmake_install.cmake
 qnetwalk
+qnetwalk_autogen
+translations/*.qm
+qrc_*.cpp
