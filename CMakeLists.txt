@@ -51,6 +51,8 @@ if(NOT MSVC)
 endif()
 
 if(NOT ${CMAKE_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
+	# make data available in the binary directory, so qnetwalk
+	# may find it if run from there
 	add_custom_target(link_sound ALL COMMAND
 		${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/sounds ${CMAKE_BINARY_DIR}/sounds
 	)
