@@ -1,7 +1,7 @@
 
 TEMPLATE	= app
 CONFIG	       += qt warn_on
-LIBS           += -lSDL_mixer
+LIBS           += -lSDL_mixer -lSDL
 
 HEADERS		= cell.h	\
 		  mainwindow.h  \
