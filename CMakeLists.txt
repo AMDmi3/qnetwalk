@@ -46,6 +46,10 @@ set_target_properties(qnetwalk PROPERTIES
 	CXX_EXTENSIONS NO
 )
 
+if(NOT MSVC)
+	target_compile_options(qnetwalk PRIVATE -Wall -Wextra -pedantic)
+endif()
+
 if(NOT ${CMAKE_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
 	add_custom_target(link_sound ALL COMMAND
 		${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/sounds ${CMAKE_BINARY_DIR}/sounds
