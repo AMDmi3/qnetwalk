@@ -1,3 +1,7 @@
+## 2018-12-13 - QNetWalk 1.5 released
+ * Ported to Qt 5.
+ * Switched build system to CMake.
+
 ## 2013-02-28 - QNetWalk 1.4 released
  * Added Simplified Chinese translation.
  * Network Audio System (NAS) replaced by SDL-mixer.
