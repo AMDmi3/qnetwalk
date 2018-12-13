@@ -43,7 +43,7 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
     QString sndDir = appDir + "/sounds/";
     
     if(!QFile::exists(sndDir))
-	sndDir = appDir + "/../share/qnetwalk/sounds/";
+	sndDir = DATADIR "/sounds/";
 
     winSound     = new Sound((sndDir + "win.wav").toLatin1().data());
     turnSound    = new Sound((sndDir + "turn.wav").toLatin1().data());

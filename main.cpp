@@ -38,7 +38,7 @@ int main(int argc, char ** argv)
     
     QTranslator translator(&app);
     if(!translator.load(filename, appdir + "/translations/"))
-	translator.load(filename, appdir + "/../share/qnetwalk/translations/");
+	translator.load(filename, DATADIR "/translations/");
     app.installTranslator(&translator);
 
     MainWindow window;
