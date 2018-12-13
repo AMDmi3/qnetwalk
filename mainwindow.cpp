@@ -73,7 +73,7 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
     if((skill != Novice) && (skill != Normal) && (skill != Expert))
 	skill = Master;
 
-    for(const auto& argument: qApp->arguments())
+    for(const auto& argument: qApp->arguments().mid(1))
     {
 	if(argument == "-novice")       
 	    skill = Novice;
