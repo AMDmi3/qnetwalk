@@ -59,8 +59,8 @@ XXX: this section needs updating
  * SDL-mixer support: Dmitriy Poltavchenko <zen@root.ua>
 
 ## Environment
- * *USER* - default user name
- * *BROWSER* - default browser
+ * **USER** - default user name
+ * **BROWSER** - default browser
 
 ## Ports
  * KDE:		Thomas Nagy <tnagy2^8@yahoo.fr>
