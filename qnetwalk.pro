@@ -2,6 +2,8 @@
 TEMPLATE	= app
 CONFIG	       += qt warn_on
 LIBS           += -lSDL_mixer -lSDL
+QT		+= widgets
+CONFIG		+= c++11
 
 HEADERS		= cell.h	\
 		  mainwindow.h  \

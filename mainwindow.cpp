@@ -45,11 +45,11 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
     if(!QFile::exists(sndDir))
 	sndDir = appDir + "/../share/qnetwalk/sounds/";
 
-    winSound     = new Sound((sndDir + "win.wav").toAscii().data());
-    turnSound    = new Sound((sndDir + "turn.wav").toAscii().data());
-    clickSound   = new Sound((sndDir + "click.wav").toAscii().data());
-    startSound   = new Sound((sndDir + "start.wav").toAscii().data());
-    connectSound = new Sound((sndDir + "connect.wav").toAscii().data());
+    winSound     = new Sound((sndDir + "win.wav").toLatin1().data());
+    turnSound    = new Sound((sndDir + "turn.wav").toLatin1().data());
+    clickSound   = new Sound((sndDir + "click.wav").toLatin1().data());
+    startSound   = new Sound((sndDir + "start.wav").toLatin1().data());
+    connectSound = new Sound((sndDir + "connect.wav").toLatin1().data());
 
     QSettings settings("QNetWalk");
     user = settings.value("Username", getenv("USER")).toString();
@@ -73,9 +73,8 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
     if((skill != Novice) && (skill != Normal) && (skill != Expert))
 	skill = Master;
 
-    for(int i = 1; i < qApp->argc(); i++)
+    for(const auto& argument: qApp->arguments())
     {
-	QString argument = qApp->argv()[i];
 	if(argument == "-novice")       
 	    skill = Novice;
 	else if(argument == "-amateur") 
@@ -87,7 +86,7 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
 	else if(argument == "-nosound") 
 	    isSound = false;
 	else 
-	    qWarning(QString("Unknown option: '" + argument + "'. Try -help.").toAscii());
+	    qWarning(QString("Unknown option: '" + argument + "'. Try -help.").toLatin1());
     }
 
     setWindowTitle(tr("QNetWalk"));
