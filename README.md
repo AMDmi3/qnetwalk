@@ -16,11 +16,11 @@ Currently maintained by [Dmitry Marakasov](https://github.com/AMDmi3) <amdmi3@am
  * SDL-mixer 1.2
 
 ## Installation
-```shell
-cmake.
+```sh
+cmake .
 make
-make install  (optional)
-update-menus  (optional)
+make install  # (optional)
+update-menus  # (optional)
 ```
 
 ## Features
