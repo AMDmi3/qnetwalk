@@ -1,0 +1,3 @@
+?package(local.games):needs="X11" section="Games/Puzzles"\
+  title="QNetWalk" command="/usr/games/qnetwalk"\
+  icon="/usr/share/pixmaps/qnetwalk.xpm"

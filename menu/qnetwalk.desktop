@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=QNetWalk
+Type=Application
+Exec=qnetwalk
+Icon=qnetwalk
+TryExec=qnetwalk
+Terminal=false
+Categories=Game;LogicGame
