@@ -10,6 +10,9 @@ Copyright (C) 2004-2013, Andi Peredri <andi@ukr.net>
 
 Currently maintained by [Dmitry Marakasov](https://github.com/AMDmi3) <amdmi3@amdmi3.ru>
 
+## Screenshot
+![QNetWalk screenshot](doc/screenshot.png)
+
 ## Requirements
  * CMake
  * Qt 5
