@@ -3,6 +3,7 @@
 <a href="https://repology.org/metapackage/qnetwalk"><img src="https://repology.org/badge/vertical-allrepos/qnetwalk.svg" alt="Packaging status" align="right"></a>
 
 [![Build Status](https://travis-ci.org/AMDmi3/qnetwalk.svg?branch=master)](https://travis-ci.org/AMDmi3/qnetwalk)
+[![Github commits (since latest release)](https://img.shields.io/github/commits-since/AMDmi3/qnetwalk/latest.svg)](https://github.com/AMDmi3/qnetwalk)
 
 QNetWalk is a game for system administrators.
 
