@@ -13,16 +13,16 @@ include(GNUInstallDirs)
 
 # sources
 set(QNETWALK_HEADERS
-	cell.h
-	mainwindow.h
-	sound.h
+	src/cell.h
+	src/mainwindow.h
+	src/sound.h
 )
 
 set(QNETWALK_SOURCES
-	cell.cpp
-	main.cpp
-	mainwindow.cpp
-	sound.cpp
+	src/cell.cpp
+	src/main.cpp
+	src/mainwindow.cpp
+	src/sound.cpp
 )
 
 set(QNETWALK_RESOURCES
