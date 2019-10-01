@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="tr">
+<TS version="2.1" language="tr">
 <context>
     <name>MainWindow</name>
     <message>
@@ -84,49 +84,49 @@
         <translation>&amp;Yardım</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="534"/>
+        <location filename="../mainwindow.cpp" line="543"/>
         <source>Highscores</source>
         <translation>Rekorlar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="550"/>
+        <location filename="../mainwindow.cpp" line="559"/>
         <source>Novices</source>
         <translation>Başlangıç</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="551"/>
+        <location filename="../mainwindow.cpp" line="560"/>
         <source>Amateurs</source>
         <translation>Orta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="552"/>
+        <location filename="../mainwindow.cpp" line="561"/>
         <source>Experts</source>
         <translation>Zor</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="552"/>
+        <location filename="../mainwindow.cpp" line="561"/>
         <source>Masters</source>
         <translation>Çok Zor</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="631"/>
+        <location filename="../mainwindow.cpp" line="640"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="632"/>
+        <location filename="../mainwindow.cpp" line="641"/>
         <source>Could not launch your web browser.
 Please, check the BROWSER environment&apos;s variable.</source>
         <translation>Web tarayıcısı başlatılamıyor.
 Lütfen,tarayıcı ayarlarını kontrol ediniz.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="640"/>
+        <location filename="../mainwindow.cpp" line="649"/>
         <source>Rules of Play</source>
         <translation>Oyun Kuralları</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="674"/>
+        <location filename="../mainwindow.cpp" line="683"/>
         <source>About QNetWalk</source>
         <translation>QNetWalk Hakkında</translation>
     </message>
@@ -136,52 +136,52 @@ Lütfen,tarayıcı ayarlarını kontrol ediniz.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="656"/>
+        <location filename="../mainwindow.cpp" line="665"/>
         <source>Keyboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="556"/>
+        <location filename="../mainwindow.cpp" line="565"/>
         <source>Scores</source>
         <translation>Puanlar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="643"/>
+        <location filename="../mainwindow.cpp" line="652"/>
         <source>You are the system administrator and your goal is to connect each computer to the central server.&lt;p&gt;Click the right mouse&apos;s button for turning the cable in a clockwise direction, and left mouse&apos;s button for turning the cable in a counter-clockwise direction.&lt;p&gt;Start the LAN with as few turns as possible!</source>
         <translation>Siz sistem yöneticisisiniz ve amacınız her bir bilgisayarı ana sunucuya bağlamak.&lt;p&gt;Kabloyu saat yönünde çevirmek için fareye sağ ve saat yönünün tersinde çevirmek için fareye sol tıklayın.&lt;p&gt;LAN ı mümkün olduğu kadar az çevirmeyle başlatın!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="660"/>
+        <location filename="../mainwindow.cpp" line="669"/>
         <source>Select a cell.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="662"/>
+        <location filename="../mainwindow.cpp" line="671"/>
         <source>Rotate counter-clockwise.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="664"/>
+        <location filename="../mainwindow.cpp" line="673"/>
         <source>Rotate clockwise.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="666"/>
+        <location filename="../mainwindow.cpp" line="675"/>
         <source>Lock and unlock the cell.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="677"/>
+        <location filename="../mainwindow.cpp" line="686"/>
         <source>QNetWalk is a free Qt-version of the NetWalk game.</source>
         <translation>QNetWalk, NetWalk oyunlarının özgür Qt versiyonudur.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="679"/>
+        <location filename="../mainwindow.cpp" line="689"/>
         <source>Homepage:</source>
         <translation>Anasayfa:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="680"/>
+        <location filename="../mainwindow.cpp" line="690"/>
         <source>This program is distributed under the terms of the GNU General Public License.</source>
         <translation>Bu program GNU Lisansı altında dağıtılmaktadır.</translation>
     </message>

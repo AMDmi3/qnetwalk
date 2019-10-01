@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de">
+<TS version="2.1" language="de">
 <context>
     <name>MainWindow</name>
     <message>
@@ -84,49 +84,49 @@
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="534"/>
+        <location filename="../mainwindow.cpp" line="543"/>
         <source>Highscores</source>
         <translation>Bestenliste</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="550"/>
+        <location filename="../mainwindow.cpp" line="559"/>
         <source>Novices</source>
         <translation>Anfänger</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="551"/>
+        <location filename="../mainwindow.cpp" line="560"/>
         <source>Amateurs</source>
         <translation>Amateure</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="552"/>
+        <location filename="../mainwindow.cpp" line="561"/>
         <source>Experts</source>
         <translation>Experten</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="552"/>
+        <location filename="../mainwindow.cpp" line="561"/>
         <source>Masters</source>
         <translation>Meister</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="631"/>
+        <location filename="../mainwindow.cpp" line="640"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="632"/>
+        <location filename="../mainwindow.cpp" line="641"/>
         <source>Could not launch your web browser.
 Please, check the BROWSER environment&apos;s variable.</source>
         <translation>Der Web-Browser konnte nicht gestartet werden.
 Bitte überprüfen Sie die Umgebungsvariable BROWSER.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="640"/>
+        <location filename="../mainwindow.cpp" line="649"/>
         <source>Rules of Play</source>
         <translation>Spielregeln</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="674"/>
+        <location filename="../mainwindow.cpp" line="683"/>
         <source>About QNetWalk</source>
         <translation>Über QNetWalk</translation>
     </message>
@@ -136,52 +136,52 @@ Bitte überprüfen Sie die Umgebungsvariable BROWSER.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="656"/>
+        <location filename="../mainwindow.cpp" line="665"/>
         <source>Keyboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="556"/>
+        <location filename="../mainwindow.cpp" line="565"/>
         <source>Scores</source>
         <translation>Punktzahl</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="643"/>
+        <location filename="../mainwindow.cpp" line="652"/>
         <source>You are the system administrator and your goal is to connect each computer to the central server.&lt;p&gt;Click the right mouse&apos;s button for turning the cable in a clockwise direction, and left mouse&apos;s button for turning the cable in a counter-clockwise direction.&lt;p&gt;Start the LAN with as few turns as possible!</source>
         <translation>Sie sind ein System-Administrator und Ihre Aufgabe ist es, jeden Computer mit dem zentralen Server zu verbinden.&lt;p&gt;Klicken Sie mit der rechten Maustaste, um ein Kabel im Uhrzeigersinn zu drehen, und mit der linken Maustaste, um ein Kabel gegen den Uhrzeigersinn zu drehen.&lt;p&gt;Richten Sie das LAN in möglichst wenigen Zügen ein!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="660"/>
+        <location filename="../mainwindow.cpp" line="669"/>
         <source>Select a cell.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="662"/>
+        <location filename="../mainwindow.cpp" line="671"/>
         <source>Rotate counter-clockwise.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="664"/>
+        <location filename="../mainwindow.cpp" line="673"/>
         <source>Rotate clockwise.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="666"/>
+        <location filename="../mainwindow.cpp" line="675"/>
         <source>Lock and unlock the cell.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="677"/>
+        <location filename="../mainwindow.cpp" line="686"/>
         <source>QNetWalk is a free Qt-version of the NetWalk game.</source>
         <translation>QNetWalk is eine freie QT-Version des Spiels Netwalk.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="679"/>
+        <location filename="../mainwindow.cpp" line="689"/>
         <source>Homepage:</source>
         <translation>Homepage:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="680"/>
+        <location filename="../mainwindow.cpp" line="690"/>
         <source>This program is distributed under the terms of the GNU General Public License.</source>
         <translation>Dieses Programm wird unter den Bedingungen der GNU General Public License veröffentlicht.</translation>
     </message>
