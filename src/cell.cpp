@@ -245,7 +245,7 @@ void Cell::paintEvent(QPaintEvent *)
 		paint.drawPixmap(int(-offset), int(-offset), * connectedpixmap[ddirs]);
 	    else 
 		paint.drawPixmap(int(-offset), int(-offset), * disconnectedpixmap[ddirs]);
-            paint.resetMatrix();
+            paint.resetTransform();
 
 	    if(root)
 		paint.drawPixmap(0, 0, QPixmap(":/pics/server.png"));
