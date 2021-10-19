@@ -1,0 +1,28 @@
+name: CI
+on: [ push, pull_request ]
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        include:
+          - { cc: gcc, cxx: g++ }
+          - { cc: clang, cxx: clang++ }
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up environment
+        run: |
+          echo 'CC=${{ matrix.cc }}' >> $GITHUB_ENV
+          echo 'CXX=${{ matrix.cxx }}' >> $GITHUB_ENV
+          echo 'CFLAGS=-Werror -Wall -Wextra -pedantic' >> $GITHUB_ENV
+          echo 'CXXFLAGS=-Werror -Wall -Wextra -pedantic' >> $GITHUB_ENV
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install qtbase5-dev qttools5-dev libsdl-mixer1.2-dev
+      - name: Configure
+        run: cmake . -DCMAKE_VERBOSE_MAKEFILE=yes -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug
+      - name: Build
+        run: cmake --build .
+      - name: Install
+        run: sudo make install
