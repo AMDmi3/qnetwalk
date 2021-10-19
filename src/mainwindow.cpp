@@ -680,7 +680,7 @@ void MainWindow::keyboard()
 void MainWindow::about()
 {
     QMessageBox box(this);
-    box.setWindowTitle(tr("About QNetWalk") + QString(" 1.5"));
+    box.setWindowTitle(tr("About QNetWalk") + QString(" " VERSION));
     box.setIconPixmap(QPixmap(":/pics/computer2.png"));
     box.setText("<h3>" + box.windowTitle() + "</h3><p>" +
 		tr("QNetWalk is a free Qt-version of the NetWalk game.") +

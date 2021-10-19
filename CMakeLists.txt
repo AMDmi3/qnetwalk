@@ -1,5 +1,7 @@
-project(qnetwalk)
 cmake_minimum_required(VERSION 3.10)
+
+# meta
+project(qnetwalk VERSION 1.6)
 
 # depends
 find_package(SDL REQUIRED)
@@ -39,7 +41,7 @@ qt5_create_translation(QNETWALK_TRANSLATIONS_QMS ${QNETWALK_SOURCES} ${QNETWALK_
 add_executable(qnetwalk ${QNETWALK_HEADERS} ${QNETWALK_SOURCES} ${QNETWALK_RESOURCES_RCC} ${QNETWALK_TRANSLATIONS_QMS})
 target_link_libraries(qnetwalk Qt5::Gui Qt5::Widgets ${SDL_LIBRARY} ${SDL_MIXER_LIBRARIES})
 target_include_directories(qnetwalk SYSTEM PRIVATE ${SDL_INCLUDE_DIR} ${SDL_MIXER_INCLUDE_DIRS})
-target_compile_definitions(qnetwalk PRIVATE -DDATADIR="${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/qnetwalk")
+target_compile_definitions(qnetwalk PRIVATE -DDATADIR="${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/qnetwalk" -DVERSION="${CMAKE_PROJECT_VERSION}")
 set_target_properties(qnetwalk PROPERTIES
 	CXX_STANDARD 11
 	CXX_STANDARD_REQURED YES
