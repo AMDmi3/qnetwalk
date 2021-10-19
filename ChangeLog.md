@@ -1,3 +1,8 @@
+## 2021-10-19 - QNetWalk 1.6 released
+ * Warning fix.
+ * Documentation improvements.
+ * Modernize translation handling.
+
 ## 2018-12-13 - QNetWalk 1.5 released
  * Ported to Qt 5.
  * Switched build system to CMake.
