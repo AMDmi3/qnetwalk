@@ -1,9 +1,9 @@
-# QNetWalk
-
 <a href="https://repology.org/metapackage/qnetwalk"><img src="https://repology.org/badge/vertical-allrepos/qnetwalk.svg" alt="Packaging status" align="right"></a>
 
 [![CI](https://github.com/AMDmi3/qnetwalk/actions/workflows/ci.yml/badge.svg)](https://github.com/AMDmi3/qnetwalk/actions/workflows/ci.yml)
 [![Github commits (since latest release)](https://img.shields.io/github/commits-since/AMDmi3/qnetwalk/latest.svg)](https://github.com/AMDmi3/qnetwalk)
+
+# QNetWalk
 
 QNetWalk is a game for system administrators.
 
@@ -80,13 +80,13 @@ Current sounds have been taken from
 If you have some free and interesting sounds for this game, feel
 free to send pull requests.
 
-# Graphics
+## Graphics
  * Andi Peredri <andi@ukr.net>
 
-# License
+## License
 QNetWalk is distributed under the GNU General Public License, version 2.
 See [COPYING](COPYING) for details.
 
-# Homepage
+## Homepage
 Official [homepage](http://qt.osdn.org.ua/qnetwalk.html) for QNetWalk is dead since 2013.
 Last [snapshot](https://web.archive.org/web/20131025174600/http://qt.osdn.org.ua/qnetwalk.html) of it is available in archive.org.
