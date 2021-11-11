@@ -22,9 +22,9 @@ Currently maintained by [Dmitry Marakasov](https://github.com/AMDmi3) <amdmi3@am
 ## Installation
 ```sh
 cmake .
-make
-make install  # (optional)
-update-menus  # (optional)
+cmake --build .
+cmake --install .  # (optional)
+update-menus       # (optional)
 ```
 
 ## Features
