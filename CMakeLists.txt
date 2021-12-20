@@ -65,6 +65,7 @@ endif()
 install(TARGETS qnetwalk RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(FILES qnetwalk.6 DESTINATION ${CMAKE_INSTALL_MANDIR}/man6)
 
+install(FILES pics/qnetwalk.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16/apps)
 install(FILES menu/qnetwalk.xpm DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pixmaps)
 install(FILES menu/qnetwalk.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
 
