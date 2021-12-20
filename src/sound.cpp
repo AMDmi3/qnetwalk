@@ -2,8 +2,8 @@
 //  qnetwalk/sound.cpp
 //  Copyright (C) 2013, Andi Peredri <andi@ukr.net>
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "sound.h"
 
