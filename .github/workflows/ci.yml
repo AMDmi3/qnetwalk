@@ -19,7 +19,9 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update -qq
-          sudo apt-get install qtbase5-dev qttools5-dev libsdl2-mixer-dev
+          sudo apt-get install qtbase5-dev qttools5-dev libsdl2-mixer-dev appstream-util
+      - name: Validate appstream file
+        run: appstream-util validate-relax --nonet menu/*.metainfo.xml
       - name: Configure
         run: cmake . -DCMAKE_VERBOSE_MAKEFILE=yes -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug
       - name: Build
