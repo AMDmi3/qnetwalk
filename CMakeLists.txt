@@ -6,7 +6,9 @@ project(qnetwalk VERSION 1.6.0)
 # depends
 find_package(SDL2 REQUIRED)
 include(FindPkgConfig)
-pkg_check_modules(SDL2_MIXER SDL2_mixer REQUIRED)
+pkg_check_modules(PC_SDL2_MIXER SDL2_mixer REQUIRED)
+find_path(SDL2_MIXER_INCLUDE_DIR NAMES SDL_mixer.h HINTS ${PC_SDL2_MIXER_INCLUDE_DIRS} REQUIRED)
+find_library(SDL2_MIXER_LIBRARY NAMES SDL2_mixer HINTS ${PC_SDL2_MIXER_LIBRARY_DIRS} REQUIRED)
 
 find_package(Qt5 REQUIRED COMPONENTS Gui Widgets LinguistTools)
 set(CMAKE_AUTOMOC ON)
@@ -40,8 +42,8 @@ qt5_add_resources(QNETWALK_RESOURCES_RCC ${QNETWALK_RESOURCES})
 qt5_create_translation(QNETWALK_TRANSLATIONS_QMS ${QNETWALK_SOURCES} ${QNETWALK_HEADERS} ${QNETWALK_TRANSLATIONS})
 
 add_executable(qnetwalk ${QNETWALK_HEADERS} ${QNETWALK_SOURCES} ${QNETWALK_RESOURCES_RCC} ${QNETWALK_TRANSLATIONS_QMS})
-target_link_libraries(qnetwalk Qt5::Gui Qt5::Widgets ${SDL2_LIBRARY} ${SDL2_MIXER_LIBRARIES})
-target_include_directories(qnetwalk SYSTEM PRIVATE ${SDL2_INCLUDE_DIR} ${SDL2_MIXER_INCLUDE_DIRS})
+target_link_libraries(qnetwalk Qt5::Gui Qt5::Widgets SDL2::SDL2 ${SDL2_MIXER_LIBRARY})
+target_include_directories(qnetwalk SYSTEM PRIVATE ${SDL2_MIXER_INCLUDE_DIR})
 target_compile_definitions(qnetwalk PRIVATE -DDATADIR="${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/qnetwalk" -DVERSION="${CMAKE_PROJECT_VERSION}")
 set_target_properties(qnetwalk PROPERTIES
 	CXX_STANDARD 11
