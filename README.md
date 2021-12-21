@@ -17,7 +17,7 @@ Currently maintained by [Dmitry Marakasov](https://github.com/AMDmi3) <amdmi3@am
 ## Requirements
  * CMake
  * Qt 5
- * SDL-mixer 1.2
+ * SDL-mixer 2.0
 
 ## Installation
 ```sh
