@@ -20,6 +20,8 @@
       <image type="source">https://raw.githubusercontent.com/AMDmi3/qnetwalk/master/doc/screenshot.png</image>
     </screenshot>
   </screenshots>
+  <launchable type="desktop-id">qnetwalk.desktop</launchable>
   <url type="homepage">https://github.com/AMDmi3/qnetwalk</url>
+  <url type="bugtracker">https://github.com/AMDmi3/qnetwalk/issues</url>
   <update_contact>amdmi3@amdmi3.ru</update_contact>
 </component>
