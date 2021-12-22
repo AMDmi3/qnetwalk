@@ -61,7 +61,8 @@ XXX: this section needs updating
  * lrelease qnetwalk.pro
 
 ## Contributors
- * SDL-mixer support: Dmitriy Poltavchenko <zen@root.ua>
+ * Dmitriy Poltavchenko <zen@root.ua>
+ * Yaakov Selkowitz <yselkowi@redhat.com>
 
 ## Environment
  * **USER** - default user name
