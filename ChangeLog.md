@@ -1,3 +1,9 @@
+## 2021-12-22 - QNetWalk 1.7.0 released
+ * Switched to semver.
+ * Minor documentation fixes.
+ * Switch to SDL2/SDL2_mixer (Yaakov Selkowitz).
+ * Modernize desktop integration (Yaakov Selkowitz).
+
 ## 2021-10-19 - QNetWalk 1.6 released
  * Warning fix.
  * Documentation improvements.
