@@ -2,14 +2,14 @@ name: CI
 on: [ push, pull_request ]
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
           - { cc: gcc, cxx: g++ }
           - { cc: clang, cxx: clang++ }
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up environment
         run: |
           echo 'CC=${{ matrix.cc }}' >> $GITHUB_ENV
@@ -20,16 +20,6 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install qtbase5-dev qttools5-dev libsdl2-mixer-dev appstream-util
-      - name: Fix sdl2-config.cmake for ancient Ubuntu
-        run: |
-          f=/usr/lib/x86_64-linux-gnu/cmake/SDL2/sdl2-config.cmake
-          sudo chmod 666 $f
-          echo 'add_library(SDL2::SDL2 SHARED IMPORTED)' >> $f
-          echo 'set_target_properties(SDL2::SDL2 PROPERTIES' >> $f
-          echo '  INTERFACE_INCLUDE_DIRECTORIES "${SDL2_INCLUDE_DIRS}"' >> $f
-          echo '  IMPORTED_LINK_INTERFACE_LANGUAGES "C"' >> $f
-          echo '  IMPORTED_LOCATION "${libdir}/${CMAKE_SHARED_LIBRARY_PREFIX}SDL2${CMAKE_SHARED_LIBRARY_SUFFIX}")' >> $f
-          cat $f
       - name: Validate appstream file
         run: appstream-util validate-relax --nonet menu/*.metainfo.xml
       - name: Configure
@@ -37,4 +27,4 @@ jobs:
       - name: Build
         run: cmake --build .
       - name: Install
-        run: sudo make install
+        run: sudo cmake --install .
