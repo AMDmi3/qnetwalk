@@ -165,7 +165,7 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
     const int gridsize = cellsize * MasterBoardSize + 2;
 
     QGridLayout * grid = new QGridLayout;
-    grid->setMargin(0);
+    grid->setContentsMargins(0, 0, 0, 0);
     grid->setSpacing(0);
 
     QFrame* frame = new QFrame(this);
@@ -544,7 +544,7 @@ void MainWindow::addHighscore(int score)
     dialog->setWindowTitle(tr("Highscores"));
     
     QGridLayout * grid = new QGridLayout(dialog);
-    grid->setMargin(10);
+    grid->setContentsMargins(10, 10, 10, 10);
     grid->setSpacing(5);
     grid->setColumnStretch(2, 1);
     grid->setRowStretch(NumHighscores + 3, 1);
