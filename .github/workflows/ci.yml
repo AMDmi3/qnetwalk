@@ -3,28 +3,38 @@ on: [ push, pull_request ]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: ubuntu:rolling
     strategy:
       matrix:
         include:
-          - { cc: gcc, cxx: g++ }
-          - { cc: clang, cxx: clang++ }
+          - { qt: 5, cxx: g++ }
+          - { qt: 5, cxx: clang++ }
+          - { qt: 6, cxx: g++ }
+          - { qt: 6, cxx: clang++ }
+    name: "Qt${{ matrix.qt }}, ${{ matrix.cxx }}"
     steps:
       - uses: actions/checkout@v3
       - name: Set up environment
         run: |
-          echo 'CC=${{ matrix.cc }}' >> $GITHUB_ENV
-          echo 'CXX=${{ matrix.cxx }}' >> $GITHUB_ENV
-          echo 'CFLAGS=-Werror -Wall -Wextra -pedantic' >> $GITHUB_ENV
-          echo 'CXXFLAGS=-Werror -Wall -Wextra -pedantic' >> $GITHUB_ENV
+          apt-get -yqq update && apt-get install -yqq curl python3
+          curl -s https://raw.githubusercontent.com/AMDmi3/github_env/0.0.1/github_env.py > e; chmod 755 e
+          ./e 'CXX=${{ matrix.cxx }}'
+          ./e 'CXXFLAGS=-Werror -Wall -Wextra -pedantic'
+          ./e --if ${{ matrix.qt == 6 }} 'CXXFLAGS+=-Wno-error=deprecated-declarations -Wno-error=unused-result'
+          ./e --if ${{ matrix.qt != 6 }} 'CMAKE_ARGS=-DUSE_QT6=OFF'
+          ./e 'DEBIAN_FRONTEND=noninteractive'
+          ./e 'DEPENDS=build-essential clang cmake curl'
+          ./e 'DEPENDS+=libsdl2-mixer-dev appstream-util'
+          ./e --if ${{ matrix.qt == 5 }} 'DEPENDS+=qtbase5-dev qttools5-dev'
+          ./e --if ${{ matrix.qt == 6 }} 'DEPENDS+=qt6-base-dev qt6-tools-dev'
       - name: Install dependencies
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install qtbase5-dev qttools5-dev libsdl2-mixer-dev appstream-util
+        run: apt-get install -yqq --no-install-recommends $DEPENDS
       - name: Validate appstream file
         run: appstream-util validate-relax --nonet menu/*.metainfo.xml
       - name: Configure
-        run: cmake . -DCMAKE_VERBOSE_MAKEFILE=yes -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug
+        run: cmake . -DCMAKE_VERBOSE_MAKEFILE=yes -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug $CMAKE_ARGS
       - name: Build
         run: cmake --build .
       - name: Install
-        run: sudo cmake --install .
+        run: cmake --install .
