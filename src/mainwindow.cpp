@@ -101,10 +101,18 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
     toolbar->setMovable(false);
 
     QAction * action;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    action = gameMenu->addAction(QPixmap(":/pics/newgame.png"), tr("&New"), QKeySequence("N"), this, SLOT(newGame()));
+#else
     action = gameMenu->addAction(QPixmap(":/pics/newgame.png"), tr("&New"), this, SLOT(newGame()), QKeySequence("N"));
+#endif
     toolbar->addAction(action);
     
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    action = gameMenu->addAction(QPixmap(":/pics/highscores.png"), tr("&Highscores"), QKeySequence("H"), this, SLOT(showHighscores()));
+#else
     action = gameMenu->addAction(QPixmap(":/pics/highscores.png"), tr("&Highscores"), this, SLOT(showHighscores()), QKeySequence("H"));
+#endif
     toolbar->addAction(action);
 
     soundAction = gameMenu->addAction(tr("&Sound"));
@@ -113,7 +121,11 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
     soundAction->setChecked(isSound);
 
     gameMenu->addSeparator();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    gameMenu->addAction(QPixmap(":/pics/quit.png"), tr("&Quit"), QKeySequence("Q"), qApp, SLOT(closeAllWindows()));
+#else
     gameMenu->addAction(QPixmap(":/pics/quit.png"), tr("&Quit"), qApp, SLOT(closeAllWindows()), QKeySequence("Q"));
+#endif
 
     QActionGroup * actions = new QActionGroup(this);
     connect(actions, SIGNAL(triggered(QAction *)), SLOT(triggeredSkill(QAction *)));
@@ -146,9 +158,17 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
 
     QMenu * helpMenu = new QMenu(tr("&Help"), this);
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    helpMenu->addAction(tr("&Rules of Play"), QKeySequence("F1"), this, SLOT(help()));
+#else
     helpMenu->addAction(tr("&Rules of Play"), this, SLOT(help()), QKeySequence("F1"));
+#endif
     helpMenu->addAction(QPixmap(":/pics/homepage.png"), tr("&Homepage"), this, SLOT(openHomepage()));
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    helpMenu->addAction(tr("&Keyboard"), QKeySequence("K"), this, SLOT(keyboard()));
+#else
     helpMenu->addAction(tr("&Keyboard"), this, SLOT(keyboard()), QKeySequence("K"));
+#endif
     helpMenu->addSeparator();
     helpMenu->addAction(QPixmap(":/pics/qnetwalk.png"), tr("&About QNetWalk"), this, SLOT(about()));
     helpMenu->addAction(tr("About &Qt"), qApp, SLOT(aboutQt()));
