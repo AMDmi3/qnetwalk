@@ -51,6 +51,7 @@ update-menus       # (optional)
  * Spanish: Ismael Asensio <iasefue@ribera.tel.uva.es>
  * Turkish: Yenay Orhan <orhany45@yahoo.com>
  * Ukrainian:	L.Marvell <l.marvell@gmail.com>
+ * Bengali: SoGreatAndPowerful <sogreatandpowerful@tuta.io>
 
 ## Translation
 XXX: this section needs updating
