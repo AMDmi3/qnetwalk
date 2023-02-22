@@ -28,7 +28,7 @@ jobs:
           ./e 'CXXFLAGS=-Werror -Wall -Wextra -pedantic'
           ./e --if ${{ matrix.qt != 6 }} 'CMAKE_ARGS=-DUSE_QT6=OFF'
           ./e 'DEBIAN_FRONTEND=noninteractive'
-          ./e 'DEPENDS=build-essential clang cmake curl'
+          ./e 'DEPENDS=build-essential clang cmake cppcheck'
           ./e 'DEPENDS+=libsdl2-mixer-dev appstream-util'
           ./e --if ${{ matrix.qt == 5 }} 'DEPENDS+=qtbase5-dev qttools5-dev qtmultimedia5-dev'
           ./e --if ${{ matrix.qt == 6 }} 'DEPENDS+=qt6-base-dev qt6-tools-dev qt6-multimedia-dev'
@@ -36,6 +36,8 @@ jobs:
           ./e --if ${{ contains(matrix.features, 'nonls') }} 'CMAKE_ARGS+=-DENABLE_NLS:BOOL=FALSE'
       - name: Install dependencies
         run: apt-get install -yqq --no-install-recommends $DEPENDS
+      - name: Run cppcheck
+        run: cppcheck --std=c++17 --quiet --enable=all src  # XXX: not fatal yet, add --error-exitcode
       - name: Validate appstream file
         run: appstream-util validate-relax --nonet menu/*.metainfo.xml
       - name: Configure
