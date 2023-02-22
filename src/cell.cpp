@@ -273,7 +273,7 @@ void Cell::mousePressEvent(QMouseEvent * e)
 	start(RotationToLeft);
     else if(e->button() == Qt::RightButton)
 	start(RotationToRight);
-    else if(e->button() == Qt::MidButton)
+    else if(e->button() == Qt::MiddleButton)
 	start(LockUnlock);
 }
 
