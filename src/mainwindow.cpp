@@ -702,7 +702,7 @@ void MainWindow::about()
     box.setText("<h3>" + box.windowTitle() + "</h3><p>" +
 		tr("QNetWalk is a free Qt-version of the NetWalk game.") +
 		"<p>Copyright (C) 2004-2013, Andi Peredri<p>" +
-		"<p>Copyright (C) 2018-2021, Dmitry Marakasov<p>" +
+		"<p>Copyright (C) 2018-2023, Dmitry Marakasov<p>" +
 		tr("Homepage:") + " https://github.com/AMDmi3/qnetwalk<p>" +
                 tr("This program is distributed under the terms of the "
 		   "GNU General Public License."));
