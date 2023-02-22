@@ -1,3 +1,9 @@
+## 2023-02-22 - QNetWalk 1.8.0 released
+ * Added Bengali translation (@SoGreatAndPowerful).
+ * Added Qt6 support, enabled by default.
+ * Fixed bunch of deprecated Qt method usage cases.
+ * I18n support improvements.
+
 ## 2021-12-22 - QNetWalk 1.7.0 released
  * Switched to semver.
  * Minor documentation fixes.
