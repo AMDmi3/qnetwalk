@@ -21,7 +21,6 @@ jobs:
           curl -s https://raw.githubusercontent.com/AMDmi3/github_env/0.0.1/github_env.py > e; chmod 755 e
           ./e 'CXX=${{ matrix.cxx }}'
           ./e 'CXXFLAGS=-Werror -Wall -Wextra -pedantic'
-          ./e --if ${{ matrix.qt == 6 }} 'CXXFLAGS+=-Wno-error=deprecated-declarations -Wno-error=unused-result'
           ./e --if ${{ matrix.qt != 6 }} 'CMAKE_ARGS=-DUSE_QT6=OFF'
           ./e 'DEBIAN_FRONTEND=noninteractive'
           ./e 'DEPENDS=build-essential clang cmake curl'
