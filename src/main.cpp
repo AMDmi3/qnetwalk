@@ -9,6 +9,8 @@
 
 #include "mainwindow.h"
 
+#include <tuple>
+
 int main(int argc, char ** argv)
 {
     if((argc > 1) && QString(argv[1]) == "-help")
@@ -27,16 +29,15 @@ int main(int argc, char ** argv)
 
     QApplication app(argc, argv);
     
-    QString locale = QLocale::system().name();
     QString appdir   = app.applicationDirPath();
-    QString filename = QString("qnetwalk_") + locale;
-    
+
     QTranslator translator(&app);
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-    translator.load(filename, ":/i18n/");
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    std::ignore = translator.load(QLocale(), "qnetwalk", "_", ":/i18n/");
 #else
-    if(!translator.load(filename, appdir + "/translations/"))
-    translator.load(filename, DATADIR "/translations/");
+    if (!translator.load(QLocale(), "qnetwalk", "_", appdir + "/translations/")) {
+        std::ignore = translator.load(QLocale(), "qnetwalk", "_", DATADIR "/translations/");
+    }
 #endif
     app.installTranslator(&translator);
 
