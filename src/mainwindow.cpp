@@ -14,6 +14,7 @@
 #include <QLineEdit>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QProcessEnvironment>
 #include <QPushButton>
 #include <QSettings>
 #include <QStringList>
@@ -23,7 +24,6 @@
 #include <QUrl>
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
 
 #include "cell.h"
@@ -53,7 +53,7 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
     connectSound = new Sound((sndDir + "connect.wav").toLatin1().data());
 
     QSettings settings("QNetWalk");
-    user = settings.value("Username", getenv("USER")).toString();
+    user = settings.value("Username", QProcessEnvironment::systemEnvironment().value("USER")).toString();
     bool isSound = settings.value("Sound", true).toBool();
 
     highscores = settings.value("Highscores").toStringList();
