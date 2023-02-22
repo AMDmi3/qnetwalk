@@ -111,7 +111,7 @@
       <message>
          <location filename="../src/mainwindow.cpp" line="640" />
          <source>Error</source>
-         <translation>ত্রুটি</translation>
+         <translation>ভুল</translation>
       </message>
       <message>
          <location filename="../src/mainwindow.cpp" line="641" />
