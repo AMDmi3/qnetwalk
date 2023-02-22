@@ -1,3 +1,8 @@
+## 2023-02-22 - QNetWalk 1.9.0 released
+ * Switched sound effects from SDL2_mixer to Qt multimedia.
+ * Optionized sound and NLS support.
+ * Fixed problems with playback of short sound effects.
+
 ## 2023-02-22 - QNetWalk 1.8.0 released
  * Added Bengali translation (@SoGreatAndPowerful).
  * Added Qt6 support, enabled by default.

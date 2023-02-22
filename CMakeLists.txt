@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # meta
-project(qnetwalk VERSION 1.8.0 LANGUAGES CXX)
+project(qnetwalk VERSION 1.9.0 LANGUAGES CXX)
 include(GNUInstallDirs)
 
 # options
