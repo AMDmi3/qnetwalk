@@ -3,6 +3,7 @@
 //  Copyright (C) 2004-2013, Andi Peredri <andi@ukr.net>
 
 #include <QAction>
+#include <QActionGroup>
 #include <QApplication>
 #include <QCloseEvent>
 #include <QDesktopServices>
