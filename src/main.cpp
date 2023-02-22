@@ -3,7 +3,6 @@
 //  Copyright (C) 2004-2013, Andi Peredri <andi@ukr.net>
 
 #include <QApplication>
-#include <QLibraryInfo>
 #include <QLocale>
 #include <QTranslator>
 #include <QTextStream>
@@ -29,12 +28,6 @@ int main(int argc, char ** argv)
     QApplication app(argc, argv);
     
     QString locale = QLocale::system().name();
-    QString qtdir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-    
-    QTranslator qtranslator(&app);
-    qtranslator.load(QString("qt_") + locale, qtdir);
-    app.installTranslator(&qtranslator);
-
     QString appdir   = app.applicationDirPath();
     QString filename = QString("qnetwalk_") + locale;
     
