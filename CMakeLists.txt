@@ -2,35 +2,50 @@ cmake_minimum_required(VERSION 3.10)
 
 # meta
 project(qnetwalk VERSION 1.8.0 LANGUAGES CXX)
+include(GNUInstallDirs)
 
-# depends
-find_package(SDL2 REQUIRED)
-find_package(SDL2_mixer REQUIRED)
-
+# options
 option(USE_QT6 "Use Qt6 instead of Qt5" ON)
+option(ENABLE_SOUND "Enable sound support (requires QtMultimedia)" ON)
+option(ENABLE_NLS "I18n support" ON)
 
-if(USE_QT6)
-	find_package(Qt6 REQUIRED COMPONENTS Widgets LinguistTools)
-	qt_standard_project_setup()
-else()
-	find_package(Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
-	set(CMAKE_AUTOMOC ON)
+set(QNETWALK_QT_COMPONENTS Widgets)
+set(QNETWALK_QT_LIBRARIES Qt::Widgets)
+set(QNETWALK_COMPILE_DEFINITIONS
+	DATADIR="${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/qnetwalk"
+	VERSION="${CMAKE_PROJECT_VERSION}"
+)
+
+if(ENABLE_SOUND)
+	set(QNETWALK_QT_COMPONENTS ${QNETWALK_QT_COMPONENTS} Multimedia)
+	set(QNETWALK_QT_LIBRARIES ${QNETWALK_QT_LIBRARIES} Qt::Multimedia)
+	set(QNETWALK_COMPILE_DEFINITIONS ${QNETWALK_COMPILE_DEFINITIONS} ENABLE_SOUND)
 endif()
 
-include(GNUInstallDirs)
+if(ENABLE_NLS)
+	set(QNETWALK_QT_COMPONENTS ${QNETWALK_QT_COMPONENTS} LinguistTools)
+	set(QNETWALK_COMPILE_DEFINITIONS ${QNETWALK_COMPILE_DEFINITIONS} ENABLE_NLS)
+endif()
+
+# depends
+if(USE_QT6)
+	find_package(Qt6 REQUIRED COMPONENTS ${QNETWALK_QT_COMPONENTS})
+	qt_standard_project_setup()
+else()
+	find_package(Qt5 REQUIRED COMPONENTS ${QNETWALK_QT_COMPONENTS})
+	set(CMAKE_AUTOMOC ON)
+endif()
 
 # sources
 set(QNETWALK_HEADERS
 	src/cell.h
 	src/mainwindow.h
-	src/sound.h
 )
 
 set(QNETWALK_SOURCES
 	src/cell.cpp
 	src/main.cpp
 	src/mainwindow.cpp
-	src/sound.cpp
 )
 
 set(QNETWALK_RESOURCES
@@ -44,20 +59,20 @@ file(GLOB QNETWALK_TRANSLATIONS
 # targets
 qt_add_resources(QNETWALK_RESOURCES_RCC ${QNETWALK_RESOURCES})
 
-if(NOT USE_QT6)
+if(NOT USE_QT6 AND ENABLE_NLS)
 	set_source_files_properties(${QNETWALK_TRANSLATIONS} PROPERTIES OUTPUT_LOCATION "${CMAKE_BINARY_DIR}/translations")
 	qt5_create_translation(QNETWALK_TRANSLATIONS_QMS ${QNETWALK_SOURCES} ${QNETWALK_HEADERS} ${QNETWALK_TRANSLATIONS})
 endif()
 
 add_executable(qnetwalk ${QNETWALK_HEADERS} ${QNETWALK_SOURCES} ${QNETWALK_RESOURCES_RCC} ${QNETWALK_TRANSLATIONS_QMS})
-target_link_libraries(qnetwalk Qt::Widgets SDL2::SDL2 SDL2_mixer::SDL2_mixer)
-target_compile_definitions(qnetwalk PRIVATE -DDATADIR="${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/qnetwalk" -DVERSION="${CMAKE_PROJECT_VERSION}")
+target_link_libraries(qnetwalk ${QNETWALK_QT_LIBRARIES})
+target_compile_definitions(qnetwalk PRIVATE ${QNETWALK_COMPILE_DEFINITIONS})
 set_target_properties(qnetwalk PROPERTIES
 	CXX_STANDARD 17
 	CXX_STANDARD_REQUIRED YES
 	CXX_EXTENSIONS NO
 )
-if(USE_QT6)
+if(USE_QT6 AND ENABLE_NLS)
 	qt_add_translations(qnetwalk TS_FILES ${QNETWALK_TRANSLATIONS})
 endif()
 
@@ -73,7 +88,7 @@ if(NOT ${CMAKE_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
 	)
 endif()
 
-# install
+# installation
 install(TARGETS qnetwalk RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(FILES qnetwalk.6 DESTINATION ${CMAKE_INSTALL_MANDIR}/man6)
 
@@ -82,5 +97,9 @@ install(FILES menu/qnetwalk.xpm DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pixmaps
 install(FILES menu/qnetwalk.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
 install(FILES menu/qnetwalk.metainfo.xml DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
 
-install(DIRECTORY sounds DESTINATION ${CMAKE_INSTALL_DATADIR}/qnetwalk)
-install(FILES ${QNETWALK_TRANSLATIONS_QMS} DESTINATION ${CMAKE_INSTALL_DATADIR}/qnetwalk/translations)
+if(ENABLE_SOUND)
+	install(DIRECTORY sounds DESTINATION ${CMAKE_INSTALL_DATADIR}/qnetwalk)
+endif()
+if(ENABLE_NLS)
+	install(FILES ${QNETWALK_TRANSLATIONS_QMS} DESTINATION ${CMAKE_INSTALL_DATADIR}/qnetwalk/translations)
+endif()

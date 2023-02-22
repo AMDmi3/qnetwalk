@@ -16,9 +16,7 @@ Currently maintained by [Dmitry Marakasov](https://github.com/AMDmi3) <amdmi3@am
 
 ## Requirements
  * CMake
- * Qt6 or Qt5
- * SDL2 >= 2.0.12
- * SDL2_mixer >= 2.6.1
+ * Qt6 or Qt5 (QtMultimedia for sound support)
 
 ## Installation
 ```sh
@@ -27,6 +25,11 @@ cmake --build .
 cmake --install .  # (optional)
 update-menus       # (optional)
 ```
+
+Build options:
+- `USE_QT6` - use Qt6 (otherwise Qt5) (enabled by default)
+- `ENABLE_SOUND` - enable sound effects (enabled by default)
+- `ENABLE_NLS` - enable localization (enabled by default)
 
 ## Features
  * Built-in levels generator.

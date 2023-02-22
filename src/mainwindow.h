@@ -7,11 +7,16 @@
 
 #include <QMainWindow>
 #include <QList>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#	include <QHash>
+#else
+#	include <QMap>
+#endif
 
 class Cell;
 class QAction;
 class QLCDNumber;
-class Sound;
+class QSoundEffect;
 
 
 class MainWindow : public QMainWindow
@@ -38,6 +43,13 @@ private:
 	NumHighscores   = 10,
 	MinimumNumCells = 20
     };
+    enum class SoundEffect {
+        Click,
+        Connect,
+        Start,
+        Turn,
+        Win,
+    };
     typedef QList<Cell *> CellList;
 private slots:
     void  help();
@@ -61,18 +73,24 @@ private:
     void   addRandomDir(CellList & list);
     void   addHighscore(int score);
     void   dialog(const QString & caption, const QString & text);
+
+    void initSoundEffect(SoundEffect effect, const QString& fileName);
+    void playSoundEffect(SoundEffect effect);
 private:
     int          skill;
     bool         wrapped;
     Cell *       root;
     Cell *       board[MasterBoardSize * MasterBoardSize];
-    Sound *      clickSound;
-    Sound *      connectSound;
-    Sound *      startSound;
-    Sound *      turnSound;
-    Sound *      winSound;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QHash<SoundEffect, QSoundEffect*> soundEffects;
+#else
+    // broken qHash of enum class
+    QMap<SoundEffect, QSoundEffect*> soundEffects;
+#endif
     QString      user;
+#if defined(ENABLE_SOUND)
     QAction *    soundAction;
+#endif
     QStringList  highscores;
     QLCDNumber * lcd;
 };

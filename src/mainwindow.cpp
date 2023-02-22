@@ -18,6 +18,9 @@
 #include <QProcessEnvironment>
 #include <QPushButton>
 #include <QSettings>
+#if defined(ENABLE_SOUND)
+#	include <QSoundEffect>
+#endif
 #include <QStringList>
 #include <QTextStream>
 #include <QTime>
@@ -29,7 +32,8 @@
 
 #include "cell.h"
 #include "mainwindow.h"
-#include "sound.h"
+
+#include <tuple>
 
 static QMap<Cell::Dirs, Cell::Dirs> contrdirs;
 
@@ -41,17 +45,11 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
     contrdirs[Cell::D] = Cell::U;
     contrdirs[Cell::L] = Cell::R;
 
-    QString appDir = qApp->applicationDirPath();
-    QString sndDir = appDir + "/sounds/";
-    
-    if(!QFile::exists(sndDir))
-	sndDir = DATADIR "/sounds/";
-
-    winSound     = new Sound((sndDir + "win.wav").toLatin1().data());
-    turnSound    = new Sound((sndDir + "turn.wav").toLatin1().data());
-    clickSound   = new Sound((sndDir + "click.wav").toLatin1().data());
-    startSound   = new Sound((sndDir + "start.wav").toLatin1().data());
-    connectSound = new Sound((sndDir + "connect.wav").toLatin1().data());
+    initSoundEffect(SoundEffect::Win, "win.wav");
+    initSoundEffect(SoundEffect::Turn, "turn.wav");
+    initSoundEffect(SoundEffect::Click, "click.wav");
+    initSoundEffect(SoundEffect::Start, "start.wav");
+    initSoundEffect(SoundEffect::Connect, "connect.wav");
 
     QSettings settings("QNetWalk");
     user = settings.value("Username", QProcessEnvironment::systemEnvironment().value("USER")).toString();
@@ -115,10 +113,14 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
 #endif
     toolbar->addAction(action);
 
+#if defined(ENABLE_SOUND)
     soundAction = gameMenu->addAction(tr("&Sound"));
     soundAction->setShortcut(QKeySequence("S"));
     soundAction->setCheckable(true);
     soundAction->setChecked(isSound);
+#else
+	std::ignore = isSound;
+#endif
 
     gameMenu->addSeparator();
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -242,11 +244,6 @@ MainWindow::MainWindow() : QMainWindow(0, Qt::Dialog)
 
 MainWindow::~MainWindow()
 {
-    delete winSound;
-    delete turnSound;
-    delete clickSound;
-    delete startSound;
-    delete connectSound;
 }
 
 
@@ -264,8 +261,7 @@ void MainWindow::triggeredSkill(QAction * action)
 void MainWindow::newGame()
 {
     lcd->display(0);
-    if(soundAction->isChecked()) 
-	startSound->play();
+    playSoundEffect(SoundEffect::Start);
 
     for(int i = 0; i < MasterBoardSize * MasterBoardSize; i++)
     {
@@ -506,28 +502,26 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
 
 void MainWindow::noRotation()
 {
-    if(soundAction->isChecked())
-	clickSound->play();
+    playSoundEffect(SoundEffect::Click);
 }
 
 
 void MainWindow::startRotation()
 {
-    if(soundAction->isChecked())
-	turnSound->play();
+    playSoundEffect(SoundEffect::Turn);
     updateConnections();
 }
 
 
 void MainWindow::finishRotation()
 {
-    if(updateConnections() && soundAction->isChecked())
-	connectSound->play();
+    if(updateConnections()) {
+        playSoundEffect(SoundEffect::Connect);
+	}
     lcd->display(lcd->intValue() + 1);
     if(isGameOver())
     {
-	if(soundAction->isChecked())
-	    winSound->play();
+        playSoundEffect(SoundEffect::Win);
 	QString score = highscores.at(2 * (skill + 1) * NumHighscores - 1);
 	if(lcd->intValue() <= score.toInt())
 	    addHighscore(lcd->intValue());
@@ -648,7 +642,9 @@ void MainWindow::closeEvent(QCloseEvent * event)
     settings.setValue("Skill", skill);
     settings.setValue("Username", user);
     settings.setValue("Highscores", highscores);
+#if defined(ENABLE_SOUND)
     settings.setValue("Sound", soundAction->isChecked());
+#endif
     event->accept();
 }
 
@@ -713,3 +709,29 @@ void MainWindow::about()
     box.exec();
 }
 
+void MainWindow::playSoundEffect(SoundEffect effect) {
+#if defined(ENABLE_SOUND)
+    if(soundAction->isChecked()) {
+        soundEffects[effect]->play();
+    }
+#else
+	std::ignore = effect;
+#endif
+}
+
+void MainWindow::initSoundEffect(SoundEffect effect, const QString& fileName) {
+#if defined(ENABLE_SOUND)
+    QString appDir = qApp->applicationDirPath();
+    QString sndDir = appDir + "/sounds/";
+
+    if (!QFile::exists(sndDir)) {
+        sndDir = DATADIR "/sounds/";
+    }
+
+    soundEffects[effect] = new QSoundEffect(this);
+    soundEffects[effect]->setSource(QUrl::fromLocalFile(sndDir + fileName));
+#else
+	std::ignore = effect;
+	std::ignore = fileName;
+#endif
+}

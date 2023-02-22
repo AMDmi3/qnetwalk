@@ -3,8 +3,10 @@
 //  Copyright (C) 2004-2013, Andi Peredri <andi@ukr.net>
 
 #include <QApplication>
-#include <QLocale>
-#include <QTranslator>
+#if defined(ENABLE_NLS)
+#	include <QLocale>
+#	include <QTranslator>
+#endif
 #include <QTextStream>
 
 #include "mainwindow.h"
@@ -29,6 +31,7 @@ int main(int argc, char ** argv)
 
     QApplication app(argc, argv);
     
+#if defined(ENABLE_NLS)
     QString appdir   = app.applicationDirPath();
 
     QTranslator translator(&app);
@@ -40,6 +43,7 @@ int main(int argc, char ** argv)
     }
 #endif
     app.installTranslator(&translator);
+#endif
 
     MainWindow window;
     window.show();

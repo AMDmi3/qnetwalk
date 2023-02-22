@@ -6,13 +6,18 @@ jobs:
     container:
       image: ubuntu:rolling
     strategy:
+      fail-fast: false
       matrix:
         include:
-          - { qt: 5, cxx: g++ }
-          - { qt: 5, cxx: clang++ }
-          - { qt: 6, cxx: g++ }
-          - { qt: 6, cxx: clang++ }
-    name: "Qt${{ matrix.qt }}, ${{ matrix.cxx }}"
+          - { qt: 5, cxx: g++,     features: '' }
+          - { qt: 5, cxx: clang++, features: '' }
+          - { qt: 5, cxx: clang++, features: 'nosound' }
+          - { qt: 5, cxx: clang++, features: 'nonls' }
+          - { qt: 6, cxx: g++,     features: '' }
+          - { qt: 6, cxx: clang++, features: '' }
+          - { qt: 6, cxx: clang++, features: 'nosound' }
+          - { qt: 6, cxx: clang++, features: 'nonls' }
+    name: "Qt${{ matrix.qt }}, ${{ matrix.cxx }}, ${{ matrix.features }}"
     steps:
       - uses: actions/checkout@v3
       - name: Set up environment
@@ -25,8 +30,10 @@ jobs:
           ./e 'DEBIAN_FRONTEND=noninteractive'
           ./e 'DEPENDS=build-essential clang cmake curl'
           ./e 'DEPENDS+=libsdl2-mixer-dev appstream-util'
-          ./e --if ${{ matrix.qt == 5 }} 'DEPENDS+=qtbase5-dev qttools5-dev'
-          ./e --if ${{ matrix.qt == 6 }} 'DEPENDS+=qt6-base-dev qt6-tools-dev'
+          ./e --if ${{ matrix.qt == 5 }} 'DEPENDS+=qtbase5-dev qttools5-dev qtmultimedia5-dev'
+          ./e --if ${{ matrix.qt == 6 }} 'DEPENDS+=qt6-base-dev qt6-tools-dev qt6-multimedia-dev'
+          ./e --if ${{ contains(matrix.features, 'nosound') }} 'CMAKE_ARGS+=-DENABLE_SOUND:BOOL=FALSE'
+          ./e --if ${{ contains(matrix.features, 'nonls') }} 'CMAKE_ARGS+=-DENABLE_NLS:BOOL=FALSE'
       - name: Install dependencies
         run: apt-get install -yqq --no-install-recommends $DEPENDS
       - name: Validate appstream file
