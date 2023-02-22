@@ -10,9 +10,15 @@ pkg_check_modules(PC_SDL2_MIXER SDL2_mixer REQUIRED)
 find_path(SDL2_MIXER_INCLUDE_DIR NAMES SDL_mixer.h HINTS ${PC_SDL2_MIXER_INCLUDE_DIRS} REQUIRED)
 find_library(SDL2_MIXER_LIBRARY NAMES SDL2_mixer HINTS ${PC_SDL2_MIXER_LIBRARY_DIRS} REQUIRED)
 
-find_package(Qt5 REQUIRED COMPONENTS Gui Widgets LinguistTools)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+option(USE_QT6 "Use Qt6 instead of Qt5" ON)
+
+if(USE_QT6)
+	find_package(Qt6 REQUIRED COMPONENTS Widgets LinguistTools)
+	qt_standard_project_setup()
+else()
+	find_package(Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
+	set(CMAKE_AUTOMOC ON)
+endif()
 
 include(GNUInstallDirs)
 
@@ -34,22 +40,30 @@ set(QNETWALK_RESOURCES
 	qnetwalk.qrc
 )
 
-file(GLOB QNETWALK_TRANSLATIONS translations/*.ts)
-set_source_files_properties(${QNETWALK_TRANSLATIONS} PROPERTIES OUTPUT_LOCATION "${CMAKE_BINARY_DIR}/translations")
+file(GLOB QNETWALK_TRANSLATIONS
+	translations/*.ts
+)
 
 # targets
-qt5_add_resources(QNETWALK_RESOURCES_RCC ${QNETWALK_RESOURCES})
-qt5_create_translation(QNETWALK_TRANSLATIONS_QMS ${QNETWALK_SOURCES} ${QNETWALK_HEADERS} ${QNETWALK_TRANSLATIONS})
+qt_add_resources(QNETWALK_RESOURCES_RCC ${QNETWALK_RESOURCES})
+
+if(NOT USE_QT6)
+	set_source_files_properties(${QNETWALK_TRANSLATIONS} PROPERTIES OUTPUT_LOCATION "${CMAKE_BINARY_DIR}/translations")
+	qt5_create_translation(QNETWALK_TRANSLATIONS_QMS ${QNETWALK_SOURCES} ${QNETWALK_HEADERS} ${QNETWALK_TRANSLATIONS})
+endif()
 
 add_executable(qnetwalk ${QNETWALK_HEADERS} ${QNETWALK_SOURCES} ${QNETWALK_RESOURCES_RCC} ${QNETWALK_TRANSLATIONS_QMS})
-target_link_libraries(qnetwalk Qt5::Gui Qt5::Widgets SDL2::SDL2 ${SDL2_MIXER_LIBRARY})
+target_link_libraries(qnetwalk Qt::Widgets SDL2::SDL2 ${SDL2_MIXER_LIBRARY})
 target_include_directories(qnetwalk SYSTEM PRIVATE ${SDL2_MIXER_INCLUDE_DIR})
 target_compile_definitions(qnetwalk PRIVATE -DDATADIR="${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/qnetwalk" -DVERSION="${CMAKE_PROJECT_VERSION}")
 set_target_properties(qnetwalk PROPERTIES
-	CXX_STANDARD 11
+	CXX_STANDARD 17
 	CXX_STANDARD_REQUIRED YES
 	CXX_EXTENSIONS NO
 )
+if(USE_QT6)
+	qt_add_translations(qnetwalk TS_FILES ${QNETWALK_TRANSLATIONS})
+endif()
 
 if(NOT MSVC)
 	target_compile_options(qnetwalk PRIVATE -Wall -Wextra -pedantic)

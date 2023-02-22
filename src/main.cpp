@@ -39,8 +39,12 @@ int main(int argc, char ** argv)
     QString filename = QString("qnetwalk_") + locale;
     
     QTranslator translator(&app);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+    translator.load(filename, ":/i18n/");
+#else
     if(!translator.load(filename, appdir + "/translations/"))
-	translator.load(filename, DATADIR "/translations/");
+    translator.load(filename, DATADIR "/translations/");
+#endif
     app.installTranslator(&translator);
 
     MainWindow window;
