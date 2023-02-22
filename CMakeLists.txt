@@ -5,10 +5,7 @@ project(qnetwalk VERSION 1.7.0 LANGUAGES CXX)
 
 # depends
 find_package(SDL2 REQUIRED)
-include(FindPkgConfig)
-pkg_check_modules(PC_SDL2_MIXER SDL2_mixer REQUIRED)
-find_path(SDL2_MIXER_INCLUDE_DIR NAMES SDL_mixer.h HINTS ${PC_SDL2_MIXER_INCLUDE_DIRS} REQUIRED)
-find_library(SDL2_MIXER_LIBRARY NAMES SDL2_mixer HINTS ${PC_SDL2_MIXER_LIBRARY_DIRS} REQUIRED)
+find_package(SDL2_mixer REQUIRED)
 
 option(USE_QT6 "Use Qt6 instead of Qt5" ON)
 
@@ -53,8 +50,7 @@ if(NOT USE_QT6)
 endif()
 
 add_executable(qnetwalk ${QNETWALK_HEADERS} ${QNETWALK_SOURCES} ${QNETWALK_RESOURCES_RCC} ${QNETWALK_TRANSLATIONS_QMS})
-target_link_libraries(qnetwalk Qt::Widgets SDL2::SDL2 ${SDL2_MIXER_LIBRARY})
-target_include_directories(qnetwalk SYSTEM PRIVATE ${SDL2_MIXER_INCLUDE_DIR})
+target_link_libraries(qnetwalk Qt::Widgets SDL2::SDL2 SDL2_mixer::SDL2_mixer)
 target_compile_definitions(qnetwalk PRIVATE -DDATADIR="${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/qnetwalk" -DVERSION="${CMAKE_PROJECT_VERSION}")
 set_target_properties(qnetwalk PROPERTIES
 	CXX_STANDARD 17
