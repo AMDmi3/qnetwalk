@@ -4,7 +4,7 @@
  * Fixed problems with playback of short sound effects.
 
 ## 2023-02-22 - QNetWalk 1.8.0 released
- * Added Bengali translation (@SoGreatAndPowerful).
+ * Added Bengali translation (@sogreatandpowerfull).
  * Added Qt6 support, enabled by default.
  * Fixed bunch of deprecated Qt method usage cases.
  * I18n support improvements.
