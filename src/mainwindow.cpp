@@ -6,6 +6,7 @@
 #include <QActionGroup>
 #include <QApplication>
 #include <QCloseEvent>
+#include <QDebug>
 #include <QDesktopServices>
 #include <QEventLoop>
 #include <QFile>
@@ -712,6 +713,7 @@ void MainWindow::about()
 void MainWindow::playSoundEffect(SoundEffect effect) {
 #if defined(ENABLE_SOUND)
     if(soundAction->isChecked()) {
+		qDebug() << "play" << (int)effect << "status" << soundEffects[effect]->status();
         soundEffects[effect]->play();
     }
 #else
@@ -729,7 +731,14 @@ void MainWindow::initSoundEffect(SoundEffect effect, const QString& fileName) {
     }
 
     soundEffects[effect] = new QSoundEffect(this);
-    soundEffects[effect]->setSource(QUrl::fromLocalFile(sndDir + fileName));
+	auto url = QUrl::fromLocalFile(sndDir + fileName);
+    soundEffects[effect]->setSource(url);
+
+	qDebug() << "init" << (int)effect << "sndDir" << sndDir;
+	qDebug() << "init" << (int)effect << "path" << sndDir + fileName;
+	qDebug() << "init" << (int)effect << "url" << url;
+	qDebug() << "init" << (int)effect << "source" << soundEffects[effect]->source();
+	qDebug() << "init" << (int)effect << "status" << soundEffects[effect]->status();
 #else
 	std::ignore = effect;
 	std::ignore = fileName;
